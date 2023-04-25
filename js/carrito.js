@@ -4,11 +4,12 @@ const tbody = document.querySelector("tbody")
 function retornoLaminaCarrito(lamina) {
                         return `<tr>
                             <th scope="row">
-                            <img src="${lamina.imagen}" class="img_obras">
+                            <img class="img_obras_carrito" src="${lamina.imagen}" alt="${lamina.alt}">
                             </th>
-                            <td class="carrito-laminas">
-                                <small>Título</small>
-                                <h3>${lamina.nombre}</h3>
+                            
+                            <td class="carrito-laminas-titulo">
+                                <small class="negrita">Título</small>
+                                <p>${lamina.nombre}</p>
                             </td>
                             <td class="carrito-lamina-tamano">
                                 <small>Tamaño</small>
@@ -24,13 +25,13 @@ function retornoLaminaCarrito(lamina) {
                             </td>
 
                             <td>
-                                <button id="${lamina.numeroLamina}" class="carrito-producto-agregar"> 
+                                <button id="${lamina.numeroLamina}" class="carrito-laminas-agregar"> 
                                 <i class="bi bi-bag-plus-fill"></i>
                                 </button>
                             </td>
 
                             <td>
-                                <button id="${lamina.numeroLamina}" class="carrito-producto-eliminar"> 
+                                <button id="${lamina.numeroLamina}" class="carrito-laminas-eliminar"> 
                                 <i class="bi bi-trash-fill"></i>
                                 </button>
                             </td>

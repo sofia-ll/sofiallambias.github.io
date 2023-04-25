@@ -19,3 +19,5 @@ class Pago{
     }
 }
 
+<p id="carrito-vacio" class="carrito-vacio">No hay láminas en tu carrito <i class="bi bi-emoji-frown">.</i></p>
+

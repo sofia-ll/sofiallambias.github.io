@@ -14,6 +14,7 @@ body {
   font-family: "Montserrat", sans-serif;
   color: rgb(56, 55, 56);
   font-size: 20px;
+  background-color: rgb(255, 250, 254);
   margin: 10px;
 }
 @media (min-width: 1024px) {
@@ -267,32 +268,91 @@ footer .mobile a {
 .fino .mb {
   margin-bottom: 15px;
 }
-.fino .videopsm {
+
+.videopsm {
   margin-top: 10px;
   margin-bottom: 15px;
   height: 202px;
   width: 360px;
 }
 @media (min-width: 576px) {
-  .fino .videopsm {
+  .videopsm {
     width: 560px;
     height: 315px;
   }
 }
 @media (min-width: 768px) {
-  .fino .videopsm {
+  .videopsm {
     width: 800px;
     height: 450px;
   }
 }
-.fino .m1 ul, .fino .m2 ul, .fino .m3 ul, .fino .m4 ul, .fino .m5 ul {
+
+.m1 ul, .m2 ul, .m3 ul, .m4 ul, .m5 ul {
   border-radius: 10px;
 }
-.fino ul li {
+
+ul li {
   padding: 0;
 }
-.fino .cv {
+
+.cv {
   margin-top: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.boton-cards {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.boton_tienda {
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.cont_tienda {
+  display: flex;
+}
+
+.boton_compra {
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 48, 0.726);
+  width: 100%;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+.contenedor-carrito {
+  display: grid;
+  grid-template-areas: "carrito_vacio" "carrito_laminas" "carrito_boton";
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.carrito-vacio {
+  grid-area: carrito_vacio;
+}
+
+.carrito-laminas {
+  grid-area: carrito_laminas;
+}
+
+.carrito_boton {
+  grid-area: carrito_boton;
+}
+
+.icono_carrito:hover {
+  background-color: rgba(250, 77, 189, 0.464);
 }
 
 @media (min-width: 576px) {
@@ -388,7 +448,7 @@ footer .mobile a {
     background-color: rgba(108, 107, 110, 0.358);
     color: rgb(240, 237, 239);
     transition-property: all;
-    transition-duration: 1.5s;
+    transition-duration: 0.5s;
     border-radius: 10px;
   }
   .padd {
@@ -440,19 +500,23 @@ footer .mobile a {
   .contactonav {
     grid-area: contactonav;
   }
+  .tiendanav {
+    grid-area: tiendanav;
+  }
   .navdesktop {
     display: grid;
     align-items: center;
-    grid-template-areas: "h1 inicionav cvnav obrasnav muestrasnav contactonav";
+    grid-template-areas: "h1 inicionav cvnav obrasnav muestrasnav contactonav tiendanav";
     gap: 5px;
-    grid-template-columns: 30% 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: auto auto auto auto auto auto auto;
     grid-template-rows: auto;
     height: 40px;
     margin: 0;
     padding-left: 0;
     padding-top: 20px;
+    justify-content: space-between;
   }
-  header {
+  .nbdsp {
     border-radius: 20px;
     background-color: rgb(240, 237, 239);
     height: 100px;
@@ -513,7 +577,17 @@ footer .mobile a {
     width: 25vw;
     border-radius: 5px;
   }
+  .artimgobras {
+    margin-bottom: 30px;
+  }
   .artimgobras:hover {
+    transform: scale(1.1);
+    transition-property: all;
+    transition-duration: 1.5s;
+    margin-top: 40px;
+    margin-bottom: 30px;
+  }
+  .boton_tienda:hover {
     transform: scale(1.1);
     transition-property: all;
     transition-duration: 1.5s;
@@ -645,5 +719,58 @@ footer .mobile a {
   }
   .bgcv {
     background-color: rgba(154, 136, 124, 0.107);
+  }
+  .subtsegundamq {
+    display: none;
+  }
+  .barrasubt {
+    display: none;
+  }
+  .n {
+    display: none;
+  }
+  .img_experiencias {
+    width: 80%;
+    text-align: justify;
+    border-radius: 10px;
+  }
+  .fonttype {
+    font-family: "Montserrat", sans-serif;
+    color: rgb(56, 55, 56);
+    margin-right: 200px;
+  }
+  .carrito-vacio {
+    display: none;
+  }
+  .carrito-laminas {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 7px;
+    padding-right: 20px;
+    border-radius: 20px;
+  }
+  .carrito-laminas small {
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .carrito-laminas-eliminar {
+    border: 0;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .carrito-laminas-agregar {
+    border: 0;
+    cursor: pointer;
+    background-color: rgba(250, 77, 189, 0.464);
+    border-radius: 10px;
+    padding: 5px;
+  }
+  .img_obras_carrito {
+    width: 100px;
+    border-radius: 5px;
   }
 }/*# sourceMappingURL=estilos.css.map */

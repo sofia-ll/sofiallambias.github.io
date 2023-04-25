@@ -13,7 +13,7 @@
     <meta name="description" content="litografía, escultura, pintura, dibujo, calados, videoarte, fotografía, artes visuales, color, gráfica">
     <link rel="shortcut icon" href="../img/favicon2.png" type="image/x-icon">
     <script defer src="../js/main.js"></script>
-    <script defer src="../js/templates.js"></script>
+    <script defer src="../js/tienda.js"></script>
     <script defer src="../js/carrito.js"></script>
 </head>
 
@@ -21,20 +21,21 @@
     <header>
         <!-- navbar desktop -->     
         
-        <nav class="nbdsp navbar navbar-expand-lg navbar-light desktop">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand bg logo fw-bold fs-2 fonttype" href="../index.html">SOFIA LLAMBIAS</a>
+                <a class="navbar-brand" href="#">SOFIA LLAMBIAS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                            <a class="nav-link active bg bkc" aria-current="page" href="../index.html">Inicio</a>
-                            <a class="nav-link active bg bkc" href="cv.html">C.V</a>
-                            <a class="nav-link active bg bkc" href="obras.html">Obras</a>
-                            <a class="nav-link active bg bkc" href="muestras.html" tabindex="-1" aria-disabled="true">Muestras</a>
-                            <a class="nav-link active bg bkc" href="contacto.html">Contacto</a>
-                            <a class="nav-link active bg bkc" href="tienda.html">TIENDA</a>
+                    <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
+                    <a class="nav-link" href="cv.html">C.V</a>
+                    <a class="nav-link" href="obras.html">Obras</a>
+                    <a class="nav-link" href="muestras.html">Muestras</a>
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                    <a class="nav-link" href="tienda.html">TIENDA</a>
+                    <a class="nav-link icono_carrito" href="carrito.html" tabindex="-1" aria-disabled="true"><i class="bi bi-cart-fill"></i>  <span class="numero_carrito">0</span></a>
                 </div>
                 </div>
             </div>
@@ -71,17 +72,11 @@
         <section class="desktop cont_tienda subtitulo">
                 <h2>
                     TIENDA
-                </h2>
-                <h6>
-                    <a class="boton-menu boton-carrito" href="carrito.html">
-                        <i class="bi bi-cart-fill"></i>  <span class="numero_carrito">0</span>
-                    </a>
-                </h6>         
+                </h2>      
         </section>
 
         <section class="imagenes_obras desktop">
-
-            <article class="artimgobras">
+            <!-- <article class="artimgobras">
                     <img class="img_obras" src="../img/litografia/paradigmas1.jpg" alt="obras tecnica litografia">
                     <div class="cont">
                         <div class="card-body text-center">
@@ -199,7 +194,7 @@
                             </button>
                         </div>
                     </div>
-            </article>
+            </article> -->
 
         </section>
 

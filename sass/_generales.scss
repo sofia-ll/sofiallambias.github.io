@@ -13,6 +13,7 @@
         font-family: $fontfamily;
         color: $colordos;
         font-size: $size;
+        background-color: $colortres;
         margin: 10px;
         @media (min-width:1024px){
             margin: 20px 40px 20px 40px;
@@ -251,6 +252,7 @@
             .mb{
                 margin-bottom: 15px;
             }
+}
 
 // muestras
 
@@ -290,9 +292,51 @@
 
     .boton_tienda{
         padding: 10px;
+        border-radius: 10px;
     }
 
     .cont_tienda{
         display:flex;
     }
+
+    .boton_compra{
+        padding: 10px;
+        border-radius: 10px;  
+        background-color: rgba(255, 255, 48, 0.726);;
+        width: 100%;
     }
+
+    .negrita{
+        font-weight: bold;
+    }
+
+    .contenedor-carrito{
+        display:grid;
+        grid-template-areas:
+        "carrito_vacio"
+        "carrito_laminas"
+        "carrito_boton";
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .carrito-vacio{
+        grid-area: carrito_vacio;
+    }
+
+    .carrito-laminas{
+        grid-area: carrito_laminas;
+    }
+
+    .carrito_boton{
+        grid-area: carrito_boton;
+    }
+
+    .icono_carrito:hover {
+        background-color: rgba(250, 77, 189, 0.464);
+    }
+
+    

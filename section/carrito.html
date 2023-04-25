@@ -19,27 +19,27 @@
 
 <body>
     <header>
-        <!-- navbar desktop -->     
+        <!-- navbar desktop -->    
         
-        <nav class="nbdsp navbar navbar-expand-lg navbar-light desktop">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand bg logo fw-bold fs-2 fonttype" href="../index.html">SOFIA LLAMBIAS</a>
+                <a class="navbar-brand" href="#">SOFIA LLAMBIAS</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse show" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                            <a class="nav-link active bg bkc" aria-current="page" href="../index.html">Inicio</a>
-                            <a class="nav-link active bg bkc" href="cv.html">C.V</a>
-                            <a class="nav-link active bg bkc" href="obras.html">Obras</a>
-                            <a class="nav-link active bg bkc" href="muestras.html" tabindex="-1" aria-disabled="true">Muestras</a>
-                            <a class="nav-link active bg bkc" href="contacto.html">Contacto</a>
-                            <a class="nav-link active bg bkc" href="tienda.html">TIENDA</a>
+                    <a class="nav-link active" aria-current="page" href="../index.html">Inicio</a>
+                    <a class="nav-link" href="cv.html">C.V</a>
+                    <a class="nav-link" href="obras.html">Obras</a>
+                    <a class="nav-link" href="muestras.html">Muestras</a>
+                    <a class="nav-link" href="contacto.html">Contacto</a>
+                    <a class="nav-link" href="tienda.html">TIENDA</a>
+                    <a class="nav-link" href="carrito.html" tabindex="-1" aria-disabled="true"><i class="bi bi-cart-fill"></i></a>
                 </div>
                 </div>
             </div>
         </nav>
-        
         <!-- navbar bootstrap primeras 2 mediaquery -->
         <section>
             <nav class="navbarmobile navbar navbar-expand-xl bkc obrassegmq primeraysegundamq">
@@ -68,33 +68,18 @@
     <!-- main desktop -->
     <main>
 
-        <section class="desktop">
-                <h2 class="subtitulo">Carrito</h2>
-                <div class="contenedor-carrito">
-                    <p id="carrito-vacio" class="carrito-vacio">No hay láminas en tu carrito <i class="bi bi-emoji-frown">.</i></p>
+        <h2 class="subtitulo">Carrito</h2>
+        <section class="contenedor-carrito desktop">
+            <p id="carrito-vacio" class="carrito-vacio"></p>
+            <table id="carrito-laminas" class="table table-hover carrito-laminas disabled">
+                <tbody>
 
-                    <table id="carrito-productos" class="table table-hover carrito-laminas disabled">
-                        <thead>
-                            <tr>
-                            <th scope="col">Imagen</th>
-                            <th scope="col">Título</th>
-                            <th scope="col">Tamaño</th>
-                            <th scope="col">Precio</th>
-                            <th scope="col">Unidades</th>
-                            <th scope="col">
-                                <button onclick="terminarCompra()">COMPRAR</button>
-                            </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
+                </tbody>
+            </table>
+            <div class="carrito_boton">
+                <button onclick="terminarCompra()" class="boton_compra text-center">Continuar Compra</button>
+            </div>
         </section>
-
-        <!-- main primera mediaquery -->
-
 
     </main>
 
