@@ -53,3 +53,26 @@ function buscarLamina(numeroLamina) {
     let busquedaLamina = laminas.find(lamina => lamina.numeroLamina === parseInt(numeroLamina))
         return busquedaLamina;
 }
+
+function iniciarCompra() {
+
+    let numeroLamina = prompt("¿Cuál es el número de la lámina que querés comprar?")
+    let laminaComprada = buscarLamina(numeroLamina)
+        
+    if (laminaComprada === undefined) {
+        alert("⛔️ Elegí una lámina, por favor.")
+        return
+    }
+    else {
+        carrito.push(laminaComprada)
+        alert(`La lámina ${laminaComprada.nombre} se agregó tu carrito. 😀`)
+        let unidades = parseInt(prompt("¿Cuántas unidades querés llevar?"))
+        let seguir = confirm("¿Querés elegir otra lámina?")
+        if(seguir) {
+            iniciarCompra()
+        }
+        else{
+            terminarCompra()
+        }
+    }
+    }
