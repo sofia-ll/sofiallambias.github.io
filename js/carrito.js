@@ -1,3 +1,4 @@
+const carrito = []
 
 const tbody = document.querySelector("tbody")
 
@@ -39,8 +40,6 @@ function retornoLaminaCarrito(lamina) {
                         </tr>`
 }
 
-// imagen:"../img/litografia/paradigmas1.jpg", numeroLamina: 0, nombre: "Litografía 1", precio: 10000, tamano: "35 cm x 50 cm", id: "cero"},
-
 function cargarLaminas(array){
 array.forEach(element => {
     tbody.innerHTML += retornoLaminaCarrito(element)
@@ -48,7 +47,7 @@ array.forEach(element => {
 onClickBotones();
 }
 
-cargarLaminas(laminas)
+cargarLaminas(carrito)
 
 function onClickBotones(){
     const buttons = document.querySelectorAll("button")
@@ -57,6 +56,18 @@ function onClickBotones(){
         agregarAlCarrito(e.target.numeroLamina)
         })
     }
+}
+
+function onClickBotones() {
+	const buttons = document.querySelectorAll("button");
+    if (botones !== null){
+        for (const button of buttons) {
+		button.addEventListener("click", (e) => {
+			agregarAlCarrito(e.target.id);
+		});
+	}
+    }
+	
 }
 
 function agregarAlCarrito(numeroLamina) {
@@ -79,3 +90,61 @@ function recuperarCarrito(){
     console.table()
 
 }
+
+function terminarCompra(){
+        if(carrito.length === 0){
+            console.warn("¡Tu carrito está vacío! 😞")
+            return
+        }
+        else {
+            subtotal()
+        }
+            }
+
+function subtotal(){
+    const total = carrito.reduce((acc, lamina) => acc + lamina.precio * unidades, 0).toFixed(2)
+    confirm(`El total es de $ ${total}`)
+    console.log(total)
+}
+
+
+let unidades = parseInt(prompt("¿Cuántas unidades querés llevar?"))
+
+function iniciarCompra() {
+
+    let numeroLamina = prompt("¿Cuál es el número de la lámina que querés comprar?")
+    let laminaComprada = buscarLamina(numeroLamina)
+        
+    if (laminaComprada === undefined) {
+        alert("⛔️ Elegí una lámina, por favor.")
+        return
+    }
+    else {
+        carrito.push(laminaComprada)
+        alert(`La lámina ${laminaComprada.nombre} se agregó tu carrito. 😀`)
+        let unidades = parseInt(prompt("¿Cuántas unidades querés llevar?"))
+        let seguir = confirm("¿Querés elegir otra lámina?")
+        if(seguir) {
+            iniciarCompra()
+        }
+        else{
+            terminarCompra()
+        }
+    }
+    }
+
+function agregarAlCarrito(numeroLamina) {
+	let resultado = laminas.find((lamina) => lamina.numeroLamina === parseInt(numeroLamina));
+	if (resultado !== undefined) {
+		carrito.push(resultado);
+		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
+		guardarCarrito(carrito);
+	}
+}
+
+function guardarCarrito(carrito) {
+	if (carrito.length > 0) {
+		localStorage.setItem("carritoLaminas", JSON.stringify(carrito));
+	}
+}
+
