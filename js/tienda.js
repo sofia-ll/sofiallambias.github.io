@@ -45,61 +45,14 @@ function cargarLaminas() {
 
 cargarLaminas();
 
-
-
-function agregarAlCarrito(numeroLamina) {
-	let resultado = laminas.find((lamina) => lamina.numeroLamina === parseInt(numeroLamina));
-	if (resultado !== undefined) {
-		carrito.push(resultado);
-		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
-		guardarCarrito(carrito);
-	}
-}
-
-function guardarCarrito(carrito){
-    if (carrito.length > 0){
-        localStorage.setItem("carritoLaminas", JSON.stringitfy(carrito))
-    }
-}
-
 function recuperarCarrito(){
     const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas")) 
     console.table()
 
 }
 
-function terminarCompra(){
-        if(carrito.length === 0){
-            console.warn("¡Tu carrito está vacío! 😞")
-            return
-        }
-        else {
-            subtotal()
-        }
-            }
-
-function subtotal(){
-    const total = carrito.reduce((acc, lamina) => acc + lamina.precio * unidades, 0).toFixed(2)
-    confirm(`El total es de $ ${total}`)
-    console.log(total)
-}
 
 
-let unidades = parseInt(prompt("¿Cuántas unidades querés llevar?"))
 
-function agregarAlCarrito(numeroLamina) {
-	let resultado = laminas.find((lamina) => lamina.numeroLamina === parseInt(numeroLamina));
-	if (resultado !== undefined) {
-		carrito.push(resultado);
-		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
-		guardarCarrito(carrito);
-	}
-}
-
-function guardarCarrito(carrito) {
-	if (carrito.length > 0) {
-		localStorage.setItem("carritoLaminas", JSON.stringify(carrito));
-	}
-}
 
 
