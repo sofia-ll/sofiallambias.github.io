@@ -1,13 +1,13 @@
-// const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Este es el array guardado en JSON
+const laminas_carrito = document.querySelector("#laminas_carrito"); // Este es el carrito con laminas seleccionadas por el usuario
+const URL = "../js/laminas.json";
+const botonCompra = document.querySelector("#boton_compra");
 
-const numero_carrito = subtotal();
-
-function actualizarTotalLaminas(){
-    numero_carrito.innerText = ${carrito.length}
+function actualizarTotalLaminas(carrito){
+    laminasCarrito.innerText = `${carrito.length}`;
 }
 
-actualizarTotalLaminas()
-const laminas_carrito = document.querySelector("#laminas_carrito")
+actualizarTotalLaminas();
 
 function retornoLaminaCarrito(lamina) {
                         return `<tr>
@@ -47,8 +47,8 @@ function retornoLaminaCarrito(lamina) {
                         </tr>`
 }
 
-function cargarLaminas(laminas) {
-    laminas.forEach(lamina => laminas_carrito.innerHTML += retornoLaminaCarrito(lamina));
+function cargarLaminas(lamina) {
+    laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
 }
 
 cargarLaminas(carrito)
@@ -62,8 +62,6 @@ function terminarCompra(){
             subtotal()
         }
             }
-
-
             
 function subtotal(){
     const total = carrito.reduce((acc, lamina) => acc + lamina.precio * unidades, 0).toFixed(2)
@@ -78,12 +76,29 @@ function agregarAlCarrito(numeroLamina) {
 		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
 		guardarCarrito(carrito);
 	}
+    console.log(carrito);
 }
 
 function guardarCarrito(carrito) {
 	if (carrito.length > 0) {
 		localStorage.setItem("carritoLaminas", JSON.stringify(carrito));
 	}
+}
+
+function recuperarCarrito(){
+    const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas")) 
+    console.table()
+
+}
+
+function clickBotonEliminar(){
+    const boton_eliminar = document.querySelector("button.carrito-laminas-eliminar")
+    if (boton_eliminar !== null){
+        botonCompra.addEventListener("click", (e)=> {
+            let indexLamina = carrito
+        }
+        )
+    }
 }
 
 
