@@ -1,8 +1,8 @@
 const botonCompra = document.querySelector("#boton_compra");
 const divTotal = document.querySelector("#total-carrito");
 const laminas = [];
-const tablaLaminasCarrito = document.querySelector("#laminas_carrito")
-
+const tablaLaminasCarrito = document.querySelector("#laminas_carrito");
+const botonVaciarCarrito = document.querySelector("#boton_vaciar_carrito");
 
 function retornoLaminaCarrito(lamina) {
                         return `<tr>
@@ -47,6 +47,7 @@ function cargarLaminas() {
     }
     else{
         tablaLaminasCarrito.innerHTML = "¡Tu carrito está vacío! 😞"
+        divTotal.innerHTML = "$" + "0"
     }
 }
 
@@ -68,11 +69,6 @@ function guardarCarrito(carrito) {
 	}
 }
 
-function recuperarCarrito(){
-    const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas"))
-    return console.table(recuperoCarrito);
-}
-
 function clickBotonEliminar(){
     const boton_eliminar = document.querySelector("button.carrito-laminas-eliminar")
     if (boton_eliminar !== null){
@@ -88,23 +84,33 @@ function clickBotonEliminar(){
 
 botonCompra.addEventListener("click", ()=>{
     Swal.fire({
-        title: 'El total es de $ ${subtotal()}',
+        title: `El total es de $ ${subtotal()}`,
         text: "¿Desea confirmar la compra?",
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
         confirmButtonText: 'SI'
         }).then((result) => {
-if (result.isConfirmed) {
-Swal.fire(
-'¡Muchas gracias!',
-'¡que disfrutes tus láminas!',
-'success'
-)
-}
+        if (result.isConfirmed) {
+            Swal.fire(
+            '¡Muchas gracias!',
+            '¡Que disfrutes tus láminas!',
+            'success'
+            )
+            }
         })
         })
 
+const vaciarCarrito = () =>{
+    carritoLaminas.splice (0, carritoLaminas.length)
+    localStorage.setItem("carritoLaminas", JSON.stringify(carritoLaminas))
+}
+
+botonVaciarCarrito.addEventListener("click", ()=>{
+        vaciarCarrito()
+        cargarLaminas()
+
+        })
 
 
 

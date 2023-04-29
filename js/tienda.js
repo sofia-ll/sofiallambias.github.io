@@ -1,5 +1,4 @@
 const carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Este es el array guardado en JSON
-const URL = "../js/laminas.json";
 const laminas = [];
 
 // const carritoLaminas = recuperarCarrito() || []

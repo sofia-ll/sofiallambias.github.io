@@ -69,8 +69,10 @@
     <main>
 
         <h2 class="subtitulo">Carrito</h2>
-        <section class="contenedor-carrito desktop">
-            <p id="carrito-vacio" class="carrito-vacio"></p>
+
+        <div class="card contenedor-carrito desktop">
+            <div class="card-body">
+                <p id="carrito-vacio" class="carrito-vacio"></p>
             <table id="carrito-laminas" class="table table-hover carrito-laminas disabled">
                 <tbody id="laminas_carrito">
 
@@ -80,10 +82,13 @@
                 <p>Total: <span id="total-carrito"></span> </p>
             </div>
             <div class="carrito_boton">
-                <button id="boton_compra" class="text-center">Continuar Compra</button>
+                <button id="boton_vaciar_carrito" class="text-center">Vaciar Carrito</button>
             </div>
-        </section>
-
+            <div class="carrito_boton">
+                <button id="boton_compra" class="text-center">CONTINUAR COMPRA</button>
+            </div>
+            </div>
+        </div>
     </main>
 
 <!-- footer primera y segunda mq -->
