@@ -1,23 +1,15 @@
-const carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Este es el array guardado en JSON
-const laminasCarrito = document.querySelector("#laminas_carrito"); // Este es el tbody carrito con laminas seleccionadas por el usuario
-const URL = "../js/laminas.json";
 const botonCompra = document.querySelector("#boton_compra");
 const divTotal = document.querySelector("#total-carrito");
 const laminas = [];
-const carritoLaminas = recuperarCarrito() || []
+const tablaLaminasCarrito = document.querySelector("#laminas_carrito")
 
-function actualizarTotalLaminas(carrito){
-laminasCarrito.innerText = carrito.length;
-}
-
-actualizarTotalLaminas();
 
 function retornoLaminaCarrito(lamina) {
                         return `<tr>
                             <th scope="row">
                             <img class="img_obras_carrito" src="${lamina.imagen}" alt="${lamina.alt}">
                             </th>
-                            
+
                             <td class="carrito-laminas-titulo">
                                 <small class="negrita">Título</small>
                                 <p>${lamina.nombre}</p>
@@ -30,19 +22,15 @@ function retornoLaminaCarrito(lamina) {
                                 <small>Precio</small>
                                 <p>$${lamina.precio}</p>
                             </td>
-                            <td class="carrito-lamina-unidades">
-                                <small>Unidades</small>
-                                <p>${lamina.unidades} </p>
-                            </td>
 
                             <td>
-                                <button id="${lamina.id}" class="carrito-laminas-agregar"> 
+                                <button id="${lamina.id}" class="carrito-laminas-agregar">
                                 <i class="bi bi-bag-plus-fill"></i>
                                 </button>
                             </td>
 
                             <td>
-                                <button id="${lamina.id}" class="carrito-laminas-eliminar"> 
+                                <button id="${lamina.id}" class="carrito-laminas-eliminar">
                                 <i class="bi bi-trash-fill"></i>
                                 </button>
                             </td>
@@ -51,39 +39,28 @@ function retornoLaminaCarrito(lamina) {
 }
 
 function cargarLaminas() {
-    laminasCarrito.innerHTML = ""
-    if (carrito.length > 0){
-        carrito.forEach((lamina) => { laminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
+    tablaLaminasCarrito.innerHTML = ""
+    if (carritoLaminas.length > 0){
+        carritoLaminas.forEach((lamina) => { tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
         clickBotonEliminar()
         divTotal.innerHTML = "$" + subtotal()
     }
     else{
-        laminasCarrito.innerHTML = "¡Tu carrito está vacío! 😞"
+        tablaLaminasCarrito.innerHTML = "¡Tu carrito está vacío! 😞"
     }
 }
 
-cargarLaminas(carrito);
+cargarLaminas();
 
-// function cargarLaminasCarrito() {
-//     laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
-// }
+function cargarLaminasCarrito() {
+    laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
+}            
 
-// cargarLaminasCarrito(carrito)
-
-function terminarCompra(){
-        if(carrito.length === 0){
-            console.warn("¡Tu carrito está vacío! 😞")
-            return
-        }
-        else {
-            subtotal()
-        }
-            }
-            
 function subtotal(){
-    const total = carrito.reduce((acc, lamina) => acc + lamina.precio, 0).toFixed(2)
-    // confirm(`El total es de $ ${total}`) PONERLO EN SWEET ALERT
+    return carritoLaminas.reduce((acc, lamina) => acc + lamina.precio, 0).toFixed(2)
 }
+
+subtotal();
 
 function guardarCarrito(carrito) {
 	if (carrito.length > 0) {
@@ -92,7 +69,7 @@ function guardarCarrito(carrito) {
 }
 
 function recuperarCarrito(){
-    const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas")) 
+    const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas"))
     return console.table(recuperoCarrito);
 }
 
@@ -111,23 +88,25 @@ function clickBotonEliminar(){
 
 botonCompra.addEventListener("click", ()=>{
     Swal.fire({
-    position: 'top-end',
-    icon: 'success',
-    title: '¡Que disfrutes tu compra!',
-    showConfirmButton: false,
-    timer: 1500
-})
-} )
+        title: 'El total es de $ ${subtotal()}',
+        text: "¿Desea confirmar la compra?",
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'SI'
+        }).then((result) => {
+if (result.isConfirmed) {
+Swal.fire(
+'¡Muchas gracias!',
+'¡que disfrutes tus láminas!',
+'success'
+)
+}
+        })
+        })
 
-// function terminarCompra(){
-//         if(carrito.length === 0){
-//             console.warn("¡Tu carrito está vacío! 😞")
-//             return
-//         }
-//         else {
-//             subtotal( )
-//         }
-//             }
+
+
 
 
 

@@ -2,7 +2,7 @@ const carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Este es el
 const URL = "../js/laminas.json";
 const laminas = [];
 
-const carritoLaminas = recuperarCarrito() || []
+// const carritoLaminas = recuperarCarrito() || []
 const contenedorObras = document.querySelector("#contenedor-obras")
 
 function traerLaminas(){
@@ -43,7 +43,7 @@ function cargarLaminas() {
         contenedorObras.appendChild(card);
 
         const btn = document.getElementById(`${lamina.id}`)
-        btn.addEventListener("click", agregarAlCarrito)
+        btn.addEventListener("click", () => agregarAlCarrito(lamina.id))
     }); 
     }
 
@@ -59,9 +59,10 @@ function agregarAlCarrito(id) {
 	if (resultado !== undefined) {
 		carritoLaminas.push(resultado);
 		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
-		guardarCarrito(carrito);
+		guardarCarrito(carritoLaminas);
 	}
     console.log(carritoLaminas);
+    actualizarContador();
 }
 
 function guardarCarrito(carrito) {
