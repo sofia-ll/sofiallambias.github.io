@@ -1,10 +1,13 @@
 const carrito = JSON.parse(localStorage.getItem("carrito")) || []; // Este es el array guardado en JSON
-const laminas_carrito = document.querySelector("#laminas_carrito"); // Este es el carrito con laminas seleccionadas por el usuario
+const laminasCarrito = document.querySelector("#laminas_carrito"); // Este es el tbody carrito con laminas seleccionadas por el usuario
 const URL = "../js/laminas.json";
 const botonCompra = document.querySelector("#boton_compra");
+const divTotal = document.querySelector("#total-carrito");
+const laminas = [];
+const carritoLaminas = recuperarCarrito() || []
 
 function actualizarTotalLaminas(carrito){
-    laminasCarrito.innerText = `${carrito.length}`;
+laminasCarrito.innerText = carrito.length;
 }
 
 actualizarTotalLaminas();
@@ -33,13 +36,13 @@ function retornoLaminaCarrito(lamina) {
                             </td>
 
                             <td>
-                                <button id="${lamina.numeroLamina}" class="carrito-laminas-agregar"> 
+                                <button id="${lamina.id}" class="carrito-laminas-agregar"> 
                                 <i class="bi bi-bag-plus-fill"></i>
                                 </button>
                             </td>
 
                             <td>
-                                <button id="${lamina.numeroLamina}" class="carrito-laminas-eliminar"> 
+                                <button id="${lamina.id}" class="carrito-laminas-eliminar"> 
                                 <i class="bi bi-trash-fill"></i>
                                 </button>
                             </td>
@@ -47,11 +50,25 @@ function retornoLaminaCarrito(lamina) {
                         </tr>`
 }
 
-function cargarLaminas(lamina) {
-    laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
+function cargarLaminas() {
+    laminasCarrito.innerHTML = ""
+    if (carrito.length > 0){
+        carrito.forEach((lamina) => { laminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
+        clickBotonEliminar()
+        divTotal.innerHTML = "$" + subtotal()
+    }
+    else{
+        laminasCarrito.innerHTML = "¡Tu carrito está vacío! 😞"
+    }
 }
 
-cargarLaminas(carrito)
+cargarLaminas(carrito);
+
+// function cargarLaminasCarrito() {
+//     laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
+// }
+
+// cargarLaminasCarrito(carrito)
 
 function terminarCompra(){
         if(carrito.length === 0){
@@ -64,19 +81,8 @@ function terminarCompra(){
             }
             
 function subtotal(){
-    const total = carrito.reduce((acc, lamina) => acc + lamina.precio * unidades, 0).toFixed(2)
-    confirm(`El total es de $ ${total}`)
-    console.log(total)
-}
-
-function agregarAlCarrito(numeroLamina) {
-	let resultado = laminas.find((lamina) => lamina.numeroLamina === parseInt(numeroLamina));
-	if (resultado !== undefined) {
-		carrito.push(resultado);
-		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
-		guardarCarrito(carrito);
-	}
-    console.log(carrito);
+    const total = carrito.reduce((acc, lamina) => acc + lamina.precio, 0).toFixed(2)
+    // confirm(`El total es de $ ${total}`) PONERLO EN SWEET ALERT
 }
 
 function guardarCarrito(carrito) {
@@ -87,18 +93,31 @@ function guardarCarrito(carrito) {
 
 function recuperarCarrito(){
     const recuperoCarrito = JSON.parse(localStorage.getItem("carritoLaminas")) 
-    console.table()
-
+    return console.table(recuperoCarrito);
 }
 
 function clickBotonEliminar(){
     const boton_eliminar = document.querySelector("button.carrito-laminas-eliminar")
     if (boton_eliminar !== null){
         botonCompra.addEventListener("click", (e)=> {
-            let indexLamina = carrito
+            let indexLamina = carrito.findIndex(lamina => lamina.id === parseInt(e.target.id))
+                carrito.splice(indexLamina, 1)
+                guardarCarrito()
+                cargarLaminasCarrito()
         }
         )
     }
 }
+
+function terminarCompra(){
+        if(carrito.length === 0){
+            console.warn("¡Tu carrito está vacío! 😞")
+            return
+        }
+        else {
+            subtotal()
+        }
+            }
+
 
 

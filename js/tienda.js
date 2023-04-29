@@ -5,21 +5,15 @@ const laminas = [];
 const carritoLaminas = recuperarCarrito() || []
 const contenedorObras = document.querySelector("#contenedor-obras")
 
-// const laminas = [{imagen:"../img/litografia/paradigmas1.jpg", alt:"obras tecnica litografia", numeroLamina: 0, nombre: "Litografía 1", precio: 10000, tamano: "35 cm x 50 cm"},
-//                 {imagen:"../img/escultura/escultura1.jpg", alt:"obras tecnica escultura", numeroLamina: 1, nombre: "Escultura 1", precio: 10000, tamano: "35 cm x 50 cm"},
-//                 {imagen:"../img/pintura1.jpg", alt:"obras tecnica pintura", numeroLamina: 2, nombre: "Pintura 1", precio: 12000, tamano: "50 cm x 50 cm"},
-//                 {imagen:"../img/calados1.jpg", alt:"obras tecnica calado", numeroLamina: 3, nombre: "Calado 1", precio: 10000, tamano: "35 cm x 50 cm"},
-//                 {imagen:"../img/dibujo1.jpg", alt:"obras tecnica dibujo", numeroLamina: 4, nombre: "Dibujo 1", precio: 12000, tamano: "50 cm x 50 cm"},
-//                 {imagen:"../img/fotografia1.jpg", alt:"obras tecnica fotografia", numeroLamina: 5, nombre: "Fotografía 1", precio: 10000, tamano: "35 cm x 50 cm"}];
-
 function traerLaminas(){
     fetch(URL)
-    .then(response => response.JSON())
+    .then(response => response.json())
     .then(data => laminas.push(...data))
     .then(data => cargarLaminas(laminas))
 }
 
 traerLaminas();
+
 
 function cardsDinamicasHTML(lamina){
         return `<img class="img_obras" src="${lamina.imagen}" alt="${lamina.alt}">
@@ -34,7 +28,7 @@ function cardsDinamicasHTML(lamina){
                             <p class="card-text fs-6 justify precio"><span class="bold">$ ${lamina.precio}</span> </p>
                         </div>
                         <div class="card-body text-center">
-                            <button class="card-text fs-6 justify button boton_tienda" id="${lamina.numeroLamina}">
+                            <button class="card-text fs-6 justify button boton_tienda" id="${lamina.id}">
                                 Agregar
                             </button>
                         </div>
@@ -48,7 +42,7 @@ function cargarLaminas() {
         card.innerHTML = cardsDinamicasHTML(lamina);
         contenedorObras.appendChild(card);
 
-        const btn = document.getElementById(`${lamina.numeroLamina}`)
+        const btn = document.getElementById(`${lamina.id}`)
         btn.addEventListener("click", agregarAlCarrito)
     }); 
     }
@@ -60,8 +54,8 @@ function recuperarCarrito(){
     return recuperoCarrito;
 }
 
-function agregarAlCarrito(numeroLamina) {
-	let resultado = laminas.find((lamina) => lamina.numeroLamina === parseInt(numeroLamina));
+function agregarAlCarrito(id) {
+	let resultado = laminas.find((lamina) => lamina.id === parseInt(id));
 	if (resultado !== undefined) {
 		carritoLaminas.push(resultado);
 		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
@@ -76,7 +70,15 @@ function guardarCarrito(carrito) {
 	}
 }
 
-
+function onClickBotones() {
+	const buttons = document.querySelectorAll("button");
+	console.log(buttons);
+	for (boton of buttons) {
+		boton.addEventListener("click", (e) => {
+			agregarAlCarrito(e.target.id) ;
+		});
+	}
+}
 
 
 
