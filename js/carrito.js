@@ -109,15 +109,28 @@ function clickBotonEliminar(){
     }
 }
 
-function terminarCompra(){
-        if(carrito.length === 0){
-            console.warn("¡Tu carrito está vacío! 😞")
-            return
-        }
-        else {
-            subtotal()
-        }
-            }
+botonCompra.addEventListener("click", ()=>{
+    Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: '¡Que disfrutes tu compra!',
+    showConfirmButton: false,
+    timer: 1500
+})
+} )
+
+// function terminarCompra(){
+//         if(carrito.length === 0){
+//             console.warn("¡Tu carrito está vacío! 😞")
+//             return
+//         }
+//         else {
+//             subtotal( )
+//         }
+//             }
+
+
+
 
 
 
