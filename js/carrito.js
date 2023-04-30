@@ -48,6 +48,7 @@ const agregarEventos = () => {
             carritoLaminas.splice(indexLamina, 1)
             guardarCarrito()
             cargarLaminas()
+            actualizarContador()
     })
 })
 }
@@ -57,7 +58,6 @@ function cargarLaminas() {
     if (carritoLaminas.length >= 0){
         carritoLaminas.forEach((lamina) => { 
             tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
-            agregarEventos()
             // clickBotonEliminar()
             divTotal.innerHTML = "$" + subtotal()
     }
@@ -148,6 +148,7 @@ botonCompra.addEventListener("click", ()=>{
 const vaciarCarrito = () =>{
     carritoLaminas.splice (0, carritoLaminas.length)
     localStorage.setItem("carritoLaminas", JSON.stringify(carritoLaminas))
+    actualizarContador()
 }
 
 botonVaciarCarrito.addEventListener("click", ()=>{

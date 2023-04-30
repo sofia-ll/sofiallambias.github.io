@@ -246,6 +246,7 @@ footer .mobile a {
   height: 2px;
   margin-bottom: 10px;
   margin-top: 15px;
+  background-color: rgba(250, 77, 189, 0.823);
 }
 @media (min-width: 576px) {
   .fino {
@@ -367,7 +368,7 @@ ul li {
   background-color: rgba(255, 255, 0, 0.599);
 }
 
-.contenedor-carrito {
+#contenedor-carrito {
   display: flex;
   align-items: center;
   justify-content: center;
