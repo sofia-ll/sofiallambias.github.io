@@ -24,12 +24,6 @@ function retornoLaminaCarrito(lamina) {
                             </td>
 
                             <td>
-                                <button id="agregar-${lamina.id}" class="carrito-laminas-agregar">
-                                <i class="bi bi-bag-plus-fill"></i>
-                                </button>
-                            </td>
-
-                            <td>
                                 <button id="borrar-${lamina.id}" class="carrito-laminas-eliminar">
                                 <i class="bi bi-trash-fill"></i>
                                 </button>
@@ -50,23 +44,15 @@ const agregarEventos = () => {
             cargarLaminas()
             actualizarContador()
     })
-            const botonAgregar = document.getElementById("agregar-" + lamina.id)
-            botonAgregar.addEventListener("click", () => {
-            console.log("agregar", lamina)
-
-            let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(lamina.id))
-            carritoLaminas.push(indexLamina, 1)
-            guardarCarrito()
-            cargarLaminas()
-            actualizarContador()
-    })
-})}
+})
+}
 
 function cargarLaminas() {
     tablaLaminasCarrito.innerHTML = ""
     if (carritoLaminas.length >= 0){
         carritoLaminas.forEach((lamina) => { 
             tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
+            // clickBotonEliminar()
             divTotal.innerHTML = "$" + subtotal()
     }
     else{
@@ -91,26 +77,6 @@ subtotal();
 function guardarCarrito() {
 		localStorage.setItem("carritoLaminas", JSON.stringify(carritoLaminas));
 }
-
-// carrito-laminas-eliminar
-
-// function clickBotonEliminar(){
-//     const boton_eliminar = document.querySelectorAll("button.carrito-laminas-eliminar")
-//     if (boton_eliminar !== null){
-//         boton_eliminar.forEach(boton =>{
-//             addEventListener("click", (e) =>{
-//             const id = e.target.id.split("-")[1];
-//             let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(lamina.id))
-//             carritoLaminas.splice(indexLamina, 1)
-//             guardarCarrito()
-//             cargarLaminas()
-//             actualizarContador()
-//             } )
-            
-//         }
-//         )
-//     }
-// }
 
 function agregarAlCarrito(id) {
 	let resultado = laminas.find((lamina) => lamina.id === parseInt(id));

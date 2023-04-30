@@ -58,17 +58,16 @@ function agregarAlCarrito(id) {
 	if (resultado !== undefined) {
 		carritoLaminas.push(resultado);
         Swal.fire({
-            text: `Se agregó la lámina ${resultado.nombre}, al carrito.`,
-            background: 'rgba(255, 255, 0, 0.8)',
+            title: '¡Genial!',
+            text: `Agregaste la lámina ${resultado.nombre}, al carrito.`,
+            imageUrl: `${resultado.imagen}`,
+            imageHeight: 200,
+            imageAlt: `${resultado.alt}`,
             color: 'rgb(86, 85, 87)',
-            timer: '1500',
-            showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-            }
+            background: '$colortres',
+            timer: '2100',
             })
+
 		guardarCarrito(carritoLaminas);
 	}
     console.log(carritoLaminas);
