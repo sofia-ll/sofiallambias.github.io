@@ -50,15 +50,23 @@ const agregarEventos = () => {
             cargarLaminas()
             actualizarContador()
     })
-})
-}
+            const botonAgregar = document.getElementById("agregar-" + lamina.id)
+            botonAgregar.addEventListener("click", () => {
+            console.log("agregar", lamina)
+
+            let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(lamina.id))
+            carritoLaminas.push(indexLamina, 1)
+            guardarCarrito()
+            cargarLaminas()
+            actualizarContador()
+    })
+})}
 
 function cargarLaminas() {
     tablaLaminasCarrito.innerHTML = ""
     if (carritoLaminas.length >= 0){
         carritoLaminas.forEach((lamina) => { 
             tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
-            // clickBotonEliminar()
             divTotal.innerHTML = "$" + subtotal()
     }
     else{

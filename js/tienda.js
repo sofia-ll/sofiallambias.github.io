@@ -58,7 +58,7 @@ function agregarAlCarrito(id) {
 	if (resultado !== undefined) {
 		carritoLaminas.push(resultado);
         Swal.fire({
-            title: `Se agregó la lámina ${resultado.nombre}, al carrito.`,
+            text: `Se agregó la lámina ${resultado.nombre}, al carrito.`,
             background: 'rgba(255, 255, 0, 0.8)',
             color: 'rgb(86, 85, 87)',
             timer: '1500',
