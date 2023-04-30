@@ -38,17 +38,34 @@ function retornoLaminaCarrito(lamina) {
                         </tr>`
 }
 
+const agregarEventos = () => {
+    carritoLaminas.forEach(lamina => {
+    const botonEliminar = document.getElementById("borrar-" + lamina.id)
+    botonEliminar.addEventListener("click", () => {
+        console.log("borrar", lamina)
+
+            let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(lamina.id))
+            carritoLaminas.splice(indexLamina, 1)
+            guardarCarrito()
+            cargarLaminas()
+    })
+})
+}
+
 function cargarLaminas() {
     tablaLaminasCarrito.innerHTML = ""
     if (carritoLaminas.length >= 0){
-        carritoLaminas.forEach((lamina) => { tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
-        clickBotonEliminar()
-        divTotal.innerHTML = "$" + subtotal()
+        carritoLaminas.forEach((lamina) => { 
+            tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
+            agregarEventos()
+            // clickBotonEliminar()
+            divTotal.innerHTML = "$" + subtotal()
     }
     else{
         tablaLaminasCarrito.innerHTML = "¡Tu carrito está vacío! 😞"
         divTotal.innerHTML = "$" + "0"
     }
+    agregarEventos()
 }
 
 cargarLaminas();
@@ -63,30 +80,29 @@ function subtotal(){
 
 subtotal();
 
-function guardarCarrito(carritoLaminas) {
-	if (carritoLaminas.length > 0) {
-		localStorage.setItem("carritoLaminas", JSON.stringify(carrito));
-	}
+function guardarCarrito() {
+		localStorage.setItem("carritoLaminas", JSON.stringify(carritoLaminas));
 }
 
 // carrito-laminas-eliminar
 
-function clickBotonEliminar(){
-    const boton_eliminar = document.querySelectorAll("button.carrito-laminas-eliminar")
-    if (boton_eliminar !== null){
-        boton_eliminar.forEach(boton =>{
-            addEventListener("click", (e) =>{
-            const id = e.target.id.split("-")[1];
-            let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(id))
-            carritoLaminas.splice(indexLamina, 1)
-            guardarCarrito()
-            cargarLaminasCarrito()
-            } )
+// function clickBotonEliminar(){
+//     const boton_eliminar = document.querySelectorAll("button.carrito-laminas-eliminar")
+//     if (boton_eliminar !== null){
+//         boton_eliminar.forEach(boton =>{
+//             addEventListener("click", (e) =>{
+//             const id = e.target.id.split("-")[1];
+//             let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(lamina.id))
+//             carritoLaminas.splice(indexLamina, 1)
+//             guardarCarrito()
+//             cargarLaminas()
+//             actualizarContador()
+//             } )
             
-        }
-        )
-    }
-}
+//         }
+//         )
+//     }
+// }
 
 function agregarAlCarrito(id) {
 	let resultado = laminas.find((lamina) => lamina.id === parseInt(id));
