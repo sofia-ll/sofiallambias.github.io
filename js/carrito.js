@@ -24,13 +24,13 @@ function retornoLaminaCarrito(lamina) {
                             </td>
 
                             <td>
-                                <button id="${lamina.id}" class="carrito-laminas-agregar">
+                                <button id="agregar-${lamina.id}" class="carrito-laminas-agregar">
                                 <i class="bi bi-bag-plus-fill"></i>
                                 </button>
                             </td>
 
                             <td>
-                                <button id="${lamina.id}" class="carrito-laminas-eliminar">
+                                <button id="borrar-${lamina.id}" class="carrito-laminas-eliminar">
                                 <i class="bi bi-trash-fill"></i>
                                 </button>
                             </td>
@@ -40,7 +40,7 @@ function retornoLaminaCarrito(lamina) {
 
 function cargarLaminas() {
     tablaLaminasCarrito.innerHTML = ""
-    if (carritoLaminas.length > 0){
+    if (carritoLaminas.length >= 0){
         carritoLaminas.forEach((lamina) => { tablaLaminasCarrito.innerHTML += retornoLaminaCarrito(lamina)})
         clickBotonEliminar()
         divTotal.innerHTML = "$" + subtotal()
@@ -54,41 +54,69 @@ function cargarLaminas() {
 cargarLaminas();
 
 function cargarLaminasCarrito() {
-    laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
+laminas.forEach(lamina => laminasCarrito.innerHTML += retornoLaminaCarrito(lamina));
 }            
 
 function subtotal(){
-    return carritoLaminas.reduce((acc, lamina) => acc + lamina.precio, 0).toFixed(2)
+    return carritoLaminas.reduce((acc, lamina) => acc + lamina.precio, 0)
 }
 
 subtotal();
 
-function guardarCarrito(carrito) {
-	if (carrito.length > 0) {
+function guardarCarrito(carritoLaminas) {
+	if (carritoLaminas.length > 0) {
 		localStorage.setItem("carritoLaminas", JSON.stringify(carrito));
 	}
 }
 
+// carrito-laminas-eliminar
+
 function clickBotonEliminar(){
-    const boton_eliminar = document.querySelector("button.carrito-laminas-eliminar")
+    const boton_eliminar = document.querySelectorAll("button.carrito-laminas-eliminar")
     if (boton_eliminar !== null){
-        botonCompra.addEventListener("click", (e)=> {
-            let indexLamina = carrito.findIndex(lamina => lamina.id === parseInt(e.target.id))
-                carrito.splice(indexLamina, 1)
-                guardarCarrito()
-                cargarLaminasCarrito()
+        boton_eliminar.forEach(boton =>{
+            addEventListener("click", (e) =>{
+            const id = e.target.id.split("-")[1];
+            let indexLamina = carritoLaminas.findIndex(lamina => lamina.id === parseInt(id))
+            carritoLaminas.splice(indexLamina, 1)
+            guardarCarrito()
+            cargarLaminasCarrito()
+            } )
+            
         }
         )
     }
 }
+
+function agregarAlCarrito(id) {
+	let resultado = laminas.find((lamina) => lamina.id === parseInt(id));
+	if (resultado !== undefined) {
+		carritoLaminas.push(resultado);
+		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
+		guardarCarrito(carritoLaminas);
+	}
+    console.log(carritoLaminas);
+    actualizarContador();
+}
+
+function clickBotonAgregar() {
+	const buttons = document.querySelectorAll("button.carrito-laminas-eliminar")
+	console.log(buttons);
+	for (boton of buttons) {
+		boton.addEventListener("click", (e) => {
+			agregarAlCarrito(e.target.id) ;
+		});
+	}
+}
+
 
 botonCompra.addEventListener("click", ()=>{
     Swal.fire({
         title: `El total es de $ ${subtotal()}`,
         text: "¿Desea confirmar la compra?",
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: 'rgba(250, 77, 189, 0.823)',
+        cancelButtonColor: 'rgb(86, 85, 87)',
         confirmButtonText: 'SI'
         }).then((result) => {
         if (result.isConfirmed) {

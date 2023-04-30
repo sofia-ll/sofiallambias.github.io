@@ -57,7 +57,15 @@ function agregarAlCarrito(id) {
 	let resultado = laminas.find((lamina) => lamina.id === parseInt(id));
 	if (resultado !== undefined) {
 		carritoLaminas.push(resultado);
-		console.log("Se agregó la lámina", resultado.nombre, "al carrito.");
+        Swal.fire({
+            title: `Se agregó la lámina ${resultado.nombre}, al carrito.`,
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
+            })
 		guardarCarrito(carritoLaminas);
 	}
     console.log(carritoLaminas);
